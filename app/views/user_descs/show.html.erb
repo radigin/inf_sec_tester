@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lname:</strong>
+  <%= @user_desc.lname %>
+</p>
+
+<p>
+  <strong>Fname:</strong>
+  <%= @user_desc.fname %>
+</p>
+
+<p>
+  <strong>Sname:</strong>
+  <%= @user_desc.sname %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user_desc.address %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_desc.user %>
+</p>
+
+<%= link_to 'Edit', edit_user_desc_path(@user_desc) %> |
+<%= link_to 'Back', user_descs_path %>
