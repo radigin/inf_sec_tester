@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%h1 
+  Вы авторизованы в системе, как:
+  = @current_user_object.user_login
+
+%h3
+  Разделы системы:
+
+%ol
+  %li
+    = link_to 'Пользователи', users_path

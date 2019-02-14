@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
+  get 'nobody/access_denied'
+  get 'nobody/login'
+  get 'nobody/start_page'
+  post 'nobody/start_page'
+  get 'nobody/logout'
+
   resources :user_descs
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'nobody#start_page'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :check_app_auth, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -71,4 +72,8 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:user_login, :user_password, :email, :is_admin)
     end
+    
+    def check_ctr_auth()
+      return true
+    end  
 end

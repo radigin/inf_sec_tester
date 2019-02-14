@@ -7,7 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <div style = "text-align: right;">
+    <%= link_to 'В начало', controller: :nobody, action: :start_page %>
+    <%= link_to 'Выход', controller: :nobody, action: :logout %>
+  </div>  
 <%= yield %>
 
 </body>
