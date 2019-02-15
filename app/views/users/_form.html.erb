@@ -23,7 +23,7 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
-  <% if @current_user_object.is_admin? %>
+  <% if @current_user_object.try(:is_admin?) %>
     <div class="field">
       <%= f.label :is_admin %><br>
       <%= f.number_field :is_admin %>
