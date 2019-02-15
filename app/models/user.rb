@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: {allow_nil: false}, presence: true
   validates :user_password, presence: true
   
-  has_many :user_descs
+  has_one :user_desc
   
   def is_admin?()
     self.is_admin == 1

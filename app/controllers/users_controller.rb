@@ -5,7 +5,15 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if @current_user_object.is_admin?
+      @users = User
+    else
+      @users = User.where.not("is_admin > 0 OR user_login = 'test'")
+    end
+    if params.has_key?(:search)
+      @users = @users.where("user_login ilike '#{params['search']}%'")
+    end
+    @users = @users.all  
   end
 
   # GET /users/1
@@ -74,6 +82,9 @@ class UsersController < ApplicationController
     end
     
     def check_ctr_auth()
-      return true
+      return true if [:new, :create].include?(action_name.to_sym)
+      return true if @current_user_object.is_admin?
+      return true if [:index, :show].include?(action_name.to_sym)
+      return false
     end  
 end

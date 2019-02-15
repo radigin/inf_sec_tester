@@ -14,6 +14,6 @@ class NobodyController < ApplicationController
   
   private
   def check_ctr_auth()
-    return true
+    return true 
   end  
 end

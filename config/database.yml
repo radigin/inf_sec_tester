@@ -7,7 +7,7 @@
 development:
   adapter: postgresql
   host: localhost
-  username: user
+  # username: user
   database: app-dev
 test:
   adapter: postgresql
