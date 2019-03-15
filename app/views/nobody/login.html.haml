@@ -5,19 +5,24 @@
     Добро пожаловать!
 
 = form_tag({controller: :nobody, action: :start_page}) do
-  %fieldset
-    %legend
-      Введите логин и пароль
-    .field
-      = label_tag('auth_login') do
-        Логин
-      = text_field_tag('auth_login', '', class: 'form-control')
-    .field
-      = label_tag('auth_password') do
-        Пароль
-      = password_field_tag('auth_password', '', class: 'form-control')
-    .actions
-      = submit_tag('Войти', class: 'btn btn-primary')
+  .modal.fade.in{tabindex: -1, style: "display: block;"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          .text-success
+            %fieldset
+              %legend
+                Введите логин и пароль
+              .field
+                = label_tag('auth_login') do
+                  Логин
+                = text_field_tag('auth_login', '', class: 'form-control')
+              .field
+                = label_tag('auth_password') do
+                  Пароль
+                = password_field_tag('auth_password', '', class: 'form-control')
+              .actions
+                = submit_tag('Войти', class: 'btn btn-primary')
 
-%div
-  = link_to 'Зарегистрироваться', new_user_path
+            %div
+              = link_to 'Зарегистрироваться', new_user_path

@@ -23,6 +23,10 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
+  <div class="field">
+    <%= f.label :hobbies %> (please insert data separeted by a |)<br>
+    <%= f.text_area :hobbies %>
+  </div>
   <% if @current_user_object.try(:is_admin?) %>
     <div class="field">
       <%= f.label :is_admin %><br>

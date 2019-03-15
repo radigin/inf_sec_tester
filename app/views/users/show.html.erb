@@ -18,9 +18,16 @@
 </p>
 
 <p>
-  <strong>Is admin:</strong>
-  <%= @user.is_admin %>
+  <strong>Hobbies:</strong>
+  <%= show_hobbies(@user) %>
 </p>
 
+<% if @current_user_object.try(:is_admin?) %>
+  <p>
+    <strong>Is admin:</strong>
+    <%= @user.is_admin %>
+  </p>
+<% end %>
+  
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

@@ -27,6 +27,7 @@
       <% if @current_user_object.is_admin? %>
         <th>Is admin</th>
       <% end %>
+      <th>Hobbies</th>  
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -42,6 +43,7 @@
         <% if @current_user_object.is_admin? %>
           <td><%= user.is_admin %></td>
         <% end %>
+        <td class = "hobbies"><%= show_small_hobbies(user) %></td>  
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
