@@ -5,7 +5,7 @@
   <%= @user.user_login %>
 </p>
 
-<% if @current_user_object.try(:is_admin?) %>
+<% if @current_user_object.try(:is_real_admin?) %>
   <p>
     <strong>User password:</strong>
     <%= @user.user_password %>
@@ -19,13 +19,17 @@
 
 <p>
   <strong>Hobbies:</strong>
-  <%= show_hobbies(@user) %>
+  <ul>
+    <% @user.hobbies.to_s.split('|').each do |x| %>
+    <li><%= x %></li>
+    <% end %>
+  </ul>
 </p>
 
-<% if @current_user_object.try(:is_admin?) %>
+<% if @current_user_object.try(:is_real_admin?) %>
   <p>
     <strong>Is admin:</strong>
-    <%= @user.is_admin %>
+    <%= @user.is_real_admin %>
   </p>
 <% end %>
   

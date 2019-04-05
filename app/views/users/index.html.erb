@@ -20,11 +20,11 @@
   <thead>
     <tr>
       <th>User login</th>
-      <% if @current_user_object.is_admin? %>
+      <% if @current_user_object.is_real_admin? %>
         <th>User password</th>
       <% end %>
       <th>Email</th>
-      <% if @current_user_object.is_admin? %>
+      <% if @current_user_object.is_real_admin? %>
         <th>Is admin</th>
       <% end %>
       <th>Hobbies</th>  
@@ -36,16 +36,25 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.user_login %></td>
-        <% if @current_user_object.is_admin? %>
+        <% if @current_user_object.is_real_admin? %>
           <td><%= user.user_password %></td>
         <% end %>
         <td><%= user.email %></td>
-        <% if @current_user_object.is_admin? %>
-          <td><%= user.is_admin %></td>
+        <% if @current_user_object.is_real_admin? %>
+          <td><%= user.is_real_admin %></td>
         <% end %>
-        <td class = "hobbies"><%= show_small_hobbies(user) %></td>  
+        <td class = "hobbies">
+          <%  hb = user.hobbies.to_s.size > 120 ? user.hobbies.mb_chars[0..119].to_s + '...' : user.hobbies.to_s %>
+          <% hb.split('|').each do |hb| %>
+            <span>
+              <%= hb %>
+            </span>
+          <% end %>
+        </td>  
         <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <% if @current_user_object.is_real_admin? or @current_user_object == user %>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <% end %>  
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td>
           <% if user.user_desc.present? %>

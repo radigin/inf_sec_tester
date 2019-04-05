@@ -5,10 +5,10 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    if @current_user_object.is_admin?
+    if @current_user_object.is_real_admin?
       @users = User
     else
-      @users = User.where("(is_admin IS NULL OR is_admin = 0) AND user_login != 'test'")
+      @users = User.where("(is_real_admin IS NULL OR is_real_admin = 0) AND user_login != 'test'")
     end
     if params.has_key?(:search)
       @users = @users.where("user_login ilike ?", "#{params['search']}%")
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @user.is_admin = 0 if @current_user_object.blank? or !@current_user_object.is_admin?
+    @user.is_real_admin = 0 if @current_user_object.blank? or !@current_user_object.is_real_admin?
     
     respond_to do |format|
       if @user.save
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    @user.is_admin = 0 unless @current_user_object.is_admin?
+    @user.is_real_admin = 0 unless @current_user_object.is_real_admin?
 
     respond_to do |format|
       if @user.update(user_params)
@@ -82,18 +82,18 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:user_login, :user_password, :email, 
-        :is_admin, :hobbies)
+        :is_real_admin, :hobbies)
     end
     
     def check_ctr_auth()
-      return true if [:new, :create].include?(action_name.to_sym)
-      return true if @current_user_object.is_admin?
+      return true if [:new, :create, :edit].include?(action_name.to_sym)
+      return true if @current_user_object.is_real_admin?
       return true if [:index].include?(action_name.to_sym)
       if [:show].include?(action_name.to_sym)
         if @user.nil?
           set_user()
         end
-        if @user.is_admin? == false and @user.user_login != 'test'
+        if @user.is_real_admin? == false and @user.user_login != 'test'
           return true   
         end
       end

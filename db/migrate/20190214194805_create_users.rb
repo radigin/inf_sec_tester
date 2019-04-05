@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :user_login
       t.string :user_password
       t.string :email
-      t.integer :is_admin
+      t.integer :is_real_admin
 
       t.timestamps null: false
     end

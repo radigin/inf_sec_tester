@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
   
   has_one :user_desc
   
-  def is_admin?()
-    self.is_admin == 1
+  def is_real_admin?()
+    self.is_real_admin == 1
   end
 
   def User.check_user(login, password)
-    User.find_by(user_login: login, user_password: password).present?
+    User.where("user_login = ? AND user_password = '#{password}'", login).to_a.first
   end
 end

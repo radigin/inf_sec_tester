@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20190315171050) do
     t.string   "user_login"
     t.string   "user_password"
     t.string   "email"
-    t.integer  "is_admin"
+    t.integer  "is_real_admin"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "hobbies"

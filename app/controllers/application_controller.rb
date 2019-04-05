@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
 
   def check_app_auth()
     if params.has_key?('auth_login') and params.has_key?('auth_password')
-      if User.check_user(params['auth_login'], params['auth_password'])
-        session[:user] = params['auth_login'] 
+      if u = User.check_user(params['auth_login'], params['auth_password'])
+        session[:user] = u.user_login#params['auth_login'] 
       end 
     end  
     if session[:user].nil?
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   
   private
   def check_ctr_auth()
-    return true if @current_user_object.is_admin?
+    return true if @current_user_object.is_real_admin?
     return false
   end
 end
