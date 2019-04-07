@@ -19,13 +19,28 @@
 <table>
   <thead>
     <tr>
-      <th>User login</th>
+      <th>
+        User login
+        <% if @current_user_object.is_real_admin? %>
+          <%= link_to('↕', users_path(sort: :user_login)) %>
+        <% end %>
+      </th>
       <% if @current_user_object.is_real_admin? %>
         <th>User password</th>
       <% end %>
-      <th>Email</th>
+      <th>
+        Email
+        <% if @current_user_object.is_real_admin? %>
+          <%= link_to('↕', users_path(sort: :email)) %>
+        <% end %>
+      </th>
       <% if @current_user_object.is_real_admin? %>
-        <th>Is admin</th>
+        <th>
+          Is admin
+          <%= link_to('↕', users_path(sort: :is_real_admin)) %>
+          <%= link_to('♔', users_path(filter: 1)) %>
+          <%= link_to('♙', users_path(filter: 0)) %>
+        </th>
       <% end %>
       <th>Hobbies</th>  
       <th colspan="4"></th>

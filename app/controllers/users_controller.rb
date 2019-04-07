@@ -7,6 +7,12 @@ class UsersController < ApplicationController
   def index
     if @current_user_object.is_real_admin?
       @users = User
+      if params.has_key?(:sort)
+        @users = @users.order("#{params[:sort]}")
+      end
+      if params.has_key?(:filter)
+        @users = @users.where("is_real_admin = #{params[:filter]}")
+      end
     else
       @users = User.where("(is_real_admin IS NULL OR is_real_admin = 0) AND user_login != 'test'")
     end
